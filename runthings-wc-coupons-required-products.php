@@ -127,8 +127,8 @@ class CouponsRequiredProducts
 
         $missing_products = array_diff($required_products, $cart_products);
         if (!empty($missing_products)) {
-            wc_add_notice(__('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products'), 'error');
-            return false;
+            $error_message = __('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products');
+            throw new Exception(esc_html($error_message));
         }
 
         return $is_valid;
