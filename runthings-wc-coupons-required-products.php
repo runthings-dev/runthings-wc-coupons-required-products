@@ -47,7 +47,6 @@ class CouponsRequiredProducts
 {
     const PLUGIN_VERSION = '1.0.0';
     const REQUIRED_PRODUCTS_META_KEY = 'runthings_wc_required_products';
-    const AUTO_APPLY_META_KEY = 'runthings_wc_auto_apply_coupon';
 
     public function __construct()
     {
@@ -60,7 +59,6 @@ class CouponsRequiredProducts
         add_action('woocommerce_coupon_options_usage_restriction', [$this, 'add_required_products_fields'], 10);
         add_action('woocommerce_coupon_options_save', [$this, 'save_required_products_fields'], 10, 1);
         add_filter('woocommerce_coupon_is_valid', [$this, 'validate_coupon_based_on_required_products'], 10, 3);
-        // add_action('woocommerce_before_cart', [$this, 'auto_apply_coupons']);
     }
 
     private function is_woocommerce_active(): bool
@@ -89,18 +87,11 @@ class CouponsRequiredProducts
         wp_nonce_field('runthings_save_required_products', 'runthings_required_products_nonce');
 
         $required_products = get_post_meta($post->ID, self::REQUIRED_PRODUCTS_META_KEY, true);
-        $auto_apply = get_post_meta($post->ID, self::AUTO_APPLY_META_KEY, true);
 
         echo '<p class="form-field">';
         echo '<label for="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '">' . esc_html__('Required Products', 'runthings-wc-coupons-required-products') . '</label>';
         echo '<input type="text" id="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" name="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" value="' . esc_attr($required_products) . '" placeholder="e.g., 123, 456, 789" style="width: 100%;" />';
         echo '<p class="description">' . esc_html__('Enter product IDs separated by commas.', 'runthings-wc-coupons-required-products') . '</p>';
-        echo '</p>';
-
-        echo '<p class="form-field">';
-        echo '<label for="' . esc_attr(self::AUTO_APPLY_META_KEY) . '">' . esc_html__('Auto Apply Coupon', 'runthings-wc-coupons-required-products') . '</label>';
-        echo '<input type="checkbox" id="' . esc_attr(self::AUTO_APPLY_META_KEY) . '" name="' . esc_attr(self::AUTO_APPLY_META_KEY) . '" value="yes" ' . checked($auto_apply, 'yes', false) . ' />';
-        echo '<p class="description">' . esc_html__('Automatically apply this coupon if the required products are in the cart.', 'runthings-wc-coupons-required-products') . '</p>';
         echo '</p>';
 
         echo '</div>';
@@ -113,10 +104,8 @@ class CouponsRequiredProducts
         }
 
         $required_products = isset($_POST[self::REQUIRED_PRODUCTS_META_KEY]) ? sanitize_text_field(wp_unslash($_POST[self::REQUIRED_PRODUCTS_META_KEY])) : '';
-        $auto_apply = isset($_POST[self::AUTO_APPLY_META_KEY]) ? 'yes' : '';
 
         update_post_meta($post_id, self::REQUIRED_PRODUCTS_META_KEY, $required_products);
-        update_post_meta($post_id, self::AUTO_APPLY_META_KEY, $auto_apply);
     }
 
     public function validate_coupon_based_on_required_products(bool $is_valid, WC_Coupon $coupon, WC_Discounts $discount): bool
@@ -144,32 +133,6 @@ class CouponsRequiredProducts
 
         return $is_valid;
     }
-
-    // public function auto_apply_coupons(): void
-    // {
-    //     $coupons = \wc_get_coupons(['limit' => -1]);
-
-    //     foreach ($coupons as $coupon) {
-    //         $coupon_id = $coupon->get_id();
-    //         $auto_apply = get_post_meta($coupon_id, self::AUTO_APPLY_META_KEY, true);
-
-    //         if ($auto_apply !== 'yes') {
-    //             continue;
-    //         }
-
-    //         // Check if the coupon is valid for the current cart
-    //         $wc_discounts = new WC_Discounts(WC()->cart);
-    //         if (!$wc_discounts->is_coupon_valid($coupon)) {
-    //             continue; // Skip invalid coupons
-    //         }
-
-    //         // Apply the coupon if not already applied
-    //         if (!WC()->cart->has_discount($coupon->get_code())) {
-    //             WC()->cart->apply_coupon($coupon->get_code());
-    //             wc_add_notice(sprintf(__('Coupon %s automatically applied.', 'runthings-wc-coupons-required-products'), $coupon->get_code()), 'success');
-    //         }
-    //     }
-    // }
 }
 
 new CouponsRequiredProducts();
