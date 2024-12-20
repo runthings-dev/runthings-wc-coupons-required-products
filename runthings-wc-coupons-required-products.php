@@ -86,7 +86,12 @@ class CouponsRequiredProducts
         echo '<div class="options_group">';
         wp_nonce_field('runthings_save_required_products', 'runthings_required_products_nonce');
 
-        $required_products = get_post_meta($post->ID, self::REQUIRED_PRODUCTS_META_KEY, true);
+        $required_products_meta = get_post_meta($post->ID, self::REQUIRED_PRODUCTS_META_KEY, true);
+        $required_products = '';
+
+        if (!empty($required_products_meta) && isset($required_products_meta['required_products'][0])) {
+            $required_products = implode(',', array_keys($required_products_meta['required_products'][0]));
+        }
 
         echo '<p class="form-field">';
         echo '<label for="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '">' . esc_html__('Required Products', 'runthings-wc-coupons-required-products') . '</label>';
@@ -105,7 +110,24 @@ class CouponsRequiredProducts
 
         $required_products = isset($_POST[self::REQUIRED_PRODUCTS_META_KEY]) ? sanitize_text_field(wp_unslash($_POST[self::REQUIRED_PRODUCTS_META_KEY])) : '';
 
-        update_post_meta($post_id, self::REQUIRED_PRODUCTS_META_KEY, $required_products);
+        // Convert the input string to an array of arrays
+        $required_products_array = array_map(function ($set) {
+            $products = explode(',', $set);
+            $product_quantities = [];
+            foreach ($products as $product) {
+                $product_id = intval($product);
+                $product_quantities[$product_id] = 1; // Default quantity to 1
+            }
+            return $product_quantities;
+        }, explode('|', $required_products));
+
+        // Add version to the data structure
+        $data_to_save = [
+            'version' => self::PLUGIN_VERSION,
+            'required_products' => $required_products_array
+        ];
+
+        update_post_meta($post_id, self::REQUIRED_PRODUCTS_META_KEY, $data_to_save);
     }
 
     public function validate_coupon_based_on_required_products(bool $is_valid, WC_Coupon $coupon, WC_Discounts $discount): bool
@@ -116,22 +138,38 @@ class CouponsRequiredProducts
         }
 
         $required_products_meta = get_post_meta($coupon->get_id(), self::REQUIRED_PRODUCTS_META_KEY, true);
-        if (empty($required_products_meta)) {
+        if (empty($required_products_meta) || !isset($required_products_meta['version'])) {
             return $is_valid;
         }
 
-        $required_products = array_map('intval', explode(',', $required_products_meta));
-        $cart_products = array_map(function ($cart_item) {
-            return $cart_item['product_id'];
-        }, WC()->cart->get_cart());
-
-        $missing_products = array_diff($required_products, $cart_products);
-        if (!empty($missing_products)) {
-            $error_message = __('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products');
-            throw new Exception(esc_html($error_message));
+        $cart_products = [];
+        foreach (WC()->cart->get_cart() as $cart_item) {
+            $product_id = $cart_item['product_id'];
+            if (isset($cart_products[$product_id])) {
+                $cart_products[$product_id] += $cart_item['quantity'];
+            } else {
+                $cart_products[$product_id] = $cart_item['quantity'];
+            }
         }
 
-        return $is_valid;
+        // Check version and handle accordingly
+        if (version_compare($required_products_meta['version'], '1.0.0', '>=')) {
+            foreach ($required_products_meta['required_products'] as $required_set) {
+                $missing_products = [];
+                foreach ($required_set as $product_id => $quantity) {
+                    if (!isset($cart_products[$product_id]) || $cart_products[$product_id] < $quantity) {
+                        $missing_products[$product_id] = $quantity;
+                    }
+                }
+
+                if (empty($missing_products)) {
+                    return $is_valid;
+                }
+            }
+        }
+
+        $error_message = __('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products');
+        throw new Exception(esc_html($error_message));
     }
 }
 
