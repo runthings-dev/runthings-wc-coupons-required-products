@@ -113,15 +113,19 @@ class CouponsRequiredProducts
         $required_products = isset($_POST[self::REQUIRED_PRODUCTS_META_KEY]) ? sanitize_text_field(wp_unslash($_POST[self::REQUIRED_PRODUCTS_META_KEY])) : '';
 
         // Convert the input string to an array of arrays
-        $required_products_array = array_map(function ($set) {
+        $required_products_array = array_filter(array_map(function ($set) {
             $products = explode(',', $set);
             $product_quantities = [];
             foreach ($products as $product) {
                 $product_id = intval($product);
-                $product_quantities[$product_id] = 1; // Default quantity to 1
+                if ($product_id > 0) {
+                    $product_quantities[$product_id] = 1; // Default quantity to 1
+                }
             }
             return $product_quantities;
-        }, explode('|', $required_products));
+        }, explode('|', $required_products)), function ($set) {
+            return !empty($set);
+        });
 
         // Add version to the data structure
         $data_to_save = [
@@ -140,9 +144,19 @@ class CouponsRequiredProducts
         }
 
         $required_products_meta = get_post_meta($coupon->get_id(), self::REQUIRED_PRODUCTS_META_KEY, true);
-        if (empty($required_products_meta) || !isset($required_products_meta['version'])) {
+
+        // Log the required products for quick checking
+        error_log(print_r($required_products_meta, true));
+
+        if (
+            empty($required_products_meta)
+            || !isset($required_products_meta['version'])
+            || empty($required_products_meta['required_products'])
+            || !is_array($required_products_meta['required_products'])
+        ) {
             return $is_valid;
         }
+
 
         $cart_products = [];
         foreach (WC()->cart->get_cart() as $cart_item) {
@@ -157,6 +171,10 @@ class CouponsRequiredProducts
         // Check version and handle accordingly
         if (version_compare($required_products_meta['version'], '1.0.0', '>=')) {
             foreach ($required_products_meta['required_products'] as $required_set) {
+                if (empty($required_set)) {
+                    continue;
+                }
+
                 $missing_products = [];
                 foreach ($required_set as $product_id => $quantity) {
                     if (!isset($cart_products[$product_id]) || $cart_products[$product_id] < $quantity) {
