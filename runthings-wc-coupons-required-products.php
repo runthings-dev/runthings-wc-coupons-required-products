@@ -94,7 +94,7 @@ class CouponsRequiredProducts
         }
 
         echo '<p class="form-field">';
-        echo '<label for="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '">' . esc_html__('Required Products', 'runthings-wc-coupons-required-products') . '</label>';
+        echo '<label for="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '">' . esc_html__('Required products', 'runthings-wc-coupons-required-products') . '</label>';
         echo '<input type="text" id="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" name="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" value="' . esc_attr($required_products) . '" placeholder="e.g., 123, 456, 789" style="width: 100%;" />';
         echo '<p class="description">' . esc_html__('Enter product IDs separated by commas.', 'runthings-wc-coupons-required-products') . '</p>';
         echo '</p>';
