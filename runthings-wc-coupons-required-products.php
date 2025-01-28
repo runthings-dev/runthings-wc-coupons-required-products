@@ -143,9 +143,6 @@ class CouponsRequiredProducts
 
         $required_products_meta = get_post_meta($coupon->get_id(), self::REQUIRED_PRODUCTS_META_KEY, true);
 
-        // Log the required products for quick checking
-        error_log(print_r($required_products_meta, true));
-
         if (
             empty($required_products_meta)
             || !isset($required_products_meta['version'])
@@ -167,23 +164,20 @@ class CouponsRequiredProducts
         }
 
         // Check version and handle accordingly
-        if (version_compare($required_products_meta['version'], '1.0.0', '>=')) {
-            foreach ($required_products_meta['required_products'] as $required_set) {
-                if (empty($required_set)) {
-                    continue;
-                }
+        if (version_compare($required_products_meta['version'], '1.0.0', '!=')) {
+            $error_message = __('This coupon is not valid.', 'runthings-wc-coupons-required-products');
+            throw new Exception(esc_html($error_message));
+        }
 
-                $missing_products = [];
-                foreach ($required_set as $product_id => $quantity) {
-                    if (!isset($cart_products[$product_id]) || $cart_products[$product_id] < $quantity) {
-                        $missing_products[$product_id] = $quantity;
-                    }
-                }
-
-                if (empty($missing_products)) {
-                    return $is_valid;
-                }
+        $missing_products = [];
+        foreach ($required_products_meta['required_products'] as $product_id => $quantity) {
+            if (!isset($cart_products[$product_id]) || $cart_products[$product_id] < $quantity) {
+                $missing_products[$product_id] = $quantity;
             }
+        }
+
+        if (empty($missing_products)) {
+            return $is_valid;
         }
 
         $error_message = __('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products');
