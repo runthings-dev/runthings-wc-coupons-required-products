@@ -87,18 +87,25 @@ class CouponsRequiredProducts
         wp_nonce_field('runthings_save_required_products', 'runthings_required_products_nonce');
 
         $required_products_meta = get_post_meta($post->ID, self::REQUIRED_PRODUCTS_META_KEY, true);
-        $required_products = '';
+        $required_products = [];
 
-        if (!empty($required_products_meta) && isset($required_products_meta['required_products'][0])) {
-            $required_products = implode(',', array_keys($required_products_meta['required_products'][0]));
+        if (!empty($required_products_meta) && isset($required_products_meta['required_products'])) {
+            $required_products = array_keys($required_products_meta['required_products']);
         }
 
         echo '<p class="form-field">';
         echo '<label for="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '">' . esc_html__('Required products', 'runthings-wc-coupons-required-products') . '</label>';
-        echo '<input type="text" class="short" id="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" name="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" value="' . esc_attr($required_products) . '" placeholder="' . esc_attr__('e.g., 123, 456, 789', 'runthings-wc-coupons-required-products') . '" />';
+        echo '<select class="wc-product-search" multiple="multiple" style="width: 50%;" id="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '" name="' . esc_attr(self::REQUIRED_PRODUCTS_META_KEY) . '[]" data-placeholder="' . esc_attr__('Search for a product&hellip;', 'runthings-wc-coupons-required-products') . '" data-action="woocommerce_json_search_products_and_variations">';
+        foreach ($required_products as $product_id) {
+            $product = wc_get_product($product_id);
+            if (is_object($product)) {
+                echo '<option value="' . esc_attr($product_id) . '" selected="selected">' . wp_kses_post($product->get_formatted_name()) . '</option>';
+            }
+        }
+        echo '</select>';
         // reason: wc_help_tip already escapes the output
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo wc_help_tip(__('Enter product IDs separated by commas.', 'runthings-wc-coupons-required-products'));
+        echo wc_help_tip(__('Select products that are required for this coupon.', 'runthings-wc-coupons-required-products'));
         echo '</p>';
 
         echo '</div>';
@@ -110,22 +117,13 @@ class CouponsRequiredProducts
             return;
         }
 
-        $required_products = isset($_POST[self::REQUIRED_PRODUCTS_META_KEY]) ? sanitize_text_field(wp_unslash($_POST[self::REQUIRED_PRODUCTS_META_KEY])) : '';
+        $required_products = isset($_POST[self::REQUIRED_PRODUCTS_META_KEY]) ? array_map('intval', (array) wp_unslash($_POST[self::REQUIRED_PRODUCTS_META_KEY])) : [];
 
-        // Convert the input string to an array of arrays
-        $required_products_array = array_filter(array_map(function ($set) {
-            $products = explode(',', $set);
-            $product_quantities = [];
-            foreach ($products as $product) {
-                $product_id = intval($product);
-                if ($product_id > 0) {
-                    $product_quantities[$product_id] = 1; // Default quantity to 1
-                }
-            }
-            return $product_quantities;
-        }, explode('|', $required_products)), function ($set) {
-            return !empty($set);
-        });
+        // Convert the input array to a single array with quantities
+        $required_products_array = [];
+        foreach ($required_products as $product_id) {
+            $required_products_array[$product_id] = 1; // Default quantity to 1
+        }
 
         // Add version to the data structure
         $data_to_save = [
