@@ -2,8 +2,8 @@
 
 /**
  * Plugin Name: Coupons Required Products for WooCommerce
- * Plugin URI: https://runthings.dev/wordpress-plugins/wc-coupons-role-restrict/
- * Description: Restrict the usage of coupons based on required products being in the cart.
+ * Plugin URI: https://runthings.dev/wordpress-plugins/wc-coupons-required-products/
+ * Description: Restrict the usage of coupons unless required products are in the cart.
  * Version: 0.0.0
  * Author: runthingsdev
  * Author URI: https://runthings.dev/
@@ -17,7 +17,7 @@
  */
 
 /*
-Copyright 2024 Matthew Harris
+Copyright 2025 Matthew Harris
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
