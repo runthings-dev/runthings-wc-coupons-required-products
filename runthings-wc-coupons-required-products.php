@@ -152,7 +152,6 @@ class CouponsRequiredProducts
             return $is_valid;
         }
 
-
         $cart_products = [];
         foreach (WC()->cart->get_cart() as $cart_item) {
             $product_id = $cart_item['product_id'];
@@ -181,6 +180,8 @@ class CouponsRequiredProducts
         }
 
         $error_message = __('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products');
+        $error_message = apply_filters('runthings_wc_coupon_required_products_error_message', $error_message, $coupon, $required_products_meta['required_products'], $missing_products);
+
         throw new Exception(esc_html($error_message));
     }
 }
