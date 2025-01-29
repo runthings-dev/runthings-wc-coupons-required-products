@@ -18,18 +18,26 @@ This plugin allows you to restrict the usage of WooCommerce coupons unless speci
 You can specify which products are required for a coupon to be valid, providing more control over your discount strategies.
 
 = Features =
-* Restrict coupon usage based on required products in the cart.
-* Option to specify multiple required products.
+* Restrict coupon usage based on all required products being in the cart.
 * Customize the error message via a filter.
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/runthings-wc-coupons-required-products` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Go to WooCommerce > Coupons and edit or create a coupon.
+3. Go to WooCommerce area of the admin panel, and look under Marketing > Coupons and edit or create a coupon.
 4. In the "Usage restriction" tab, you will see the option to select required products for the coupon.
 
 == Frequently Asked Questions ==
+
+= What is the difference between the built-in WooCommerce "Products" field and this plugin? =
+The built-in WooCommerce "Products" field allows you to specify products that the coupon can be applied to. 
+
+This means that the discount will be applied if *any* of the specified products are in the cart.
+
+In contrast, this plugin restricts the usage of the coupon unless *all* of the specified products are in the cart. 
+
+This means that the coupon will not be valid unless every  required product is present in the cart.
 
 = How do I restrict a coupon to specific products? =
 Edit the coupon and go to the "Usage restriction" tab.
@@ -56,7 +64,7 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 
 == Changelog ==
 
-= 1.0.0 - 17th November 2025 =
+= 1.0.0 - 29th January 2025 =
 * Initial release.
 * Restrict coupons by required products.
 * Filter `runthings_wc_coupon_required_products_error_message` to customize error message.
