@@ -105,13 +105,13 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Screenshots
 
-1. Coupon settings page with required products fields.
-   ![Coupon settings page with required products fields](screenshot-1.png)
+1. Coupon settings page with required products field.
+   ![Coupon settings page with required products field](screenshot-1.png)
 
-2. Coupon required products selection field.
-   ![Coupon required products selection field](screenshot-2.png)
+2. Example denied coupon usage due to missing required products.
+   ![Example denied coupon usage due to missing required products](screenshot-2.png)
 
-3. Example denied coupon usage due to missing required products.
+3. Example denied coupon usage due to missing required products, with custom message.
    ![Example denied coupon usage due to missing required products](screenshot-3.png)
 
 ## Changelog

@@ -59,8 +59,8 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 == Screenshots ==
 
 1. Coupon settings page with required products fields.
-2. Coupon required products selection field.
-3. Example denied coupon usage due to missing required products.
+2. Example denied coupon usage due to missing required products.
+3. Example denied coupon usage due to missing required products, with custom message.
 
 == Changelog ==
 
