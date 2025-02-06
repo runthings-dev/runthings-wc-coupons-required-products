@@ -55,7 +55,6 @@ class CouponsRequiredProducts
             return;
         }
 
-        add_action('plugins_loaded', [$this, 'load_textdomain']);
         add_action('woocommerce_coupon_options_usage_restriction', [$this, 'add_required_products_fields'], 10);
         add_action('woocommerce_coupon_options_save', [$this, 'save_required_products_fields'], 10, 1);
         add_filter('woocommerce_coupon_is_valid', [$this, 'validate_coupon_based_on_required_products'], 10, 3);
@@ -72,11 +71,6 @@ class CouponsRequiredProducts
         echo '<div class="error"><p>';
         esc_html_e('Coupons Required Products for WooCommerce requires WooCommerce to be active. Please install and activate WooCommerce.', 'runthings-wc-coupons-required-products');
         echo '</p></div>';
-    }
-
-    public function load_textdomain(): void
-    {
-        load_plugin_textdomain('runthings-wc-coupons-required-products', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 
     public function add_required_products_fields(): void
