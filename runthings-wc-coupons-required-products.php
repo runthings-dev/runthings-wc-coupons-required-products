@@ -157,7 +157,7 @@ class CouponsRequiredProducts
         }
 
         // Check version and handle accordingly
-        if (version_compare($required_products_meta['version'], '1.0.0', '!=')) {
+        if (version_compare($required_products_meta['version'], '1.0.0', '>=')) {
             $error_message = __('This coupon is not valid.', 'runthings-wc-coupons-required-products');
             throw new Exception(esc_html($error_message));
         }
