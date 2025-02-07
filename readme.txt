@@ -5,7 +5,7 @@ Tested up to: 6.7
 Requires at least: 6.4
 Requires PHP: 8.0
 Requires WooCommerce: 8.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,12 +64,20 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 
 == Changelog ==
 
+= 1.1.0 - 7th February 2025 =
+* Incorporate amends requested for WordPress plugin directory submission.
+* Filter `runthings_wc_coupons_required_products_error_message` to customize error message.
+* Filter `runthings_wc_coupon_required_products_error_message` deprecated.
+
 = 1.0.0 - 29th January 2025 =
 * Initial release.
 * Restrict coupons by required products.
 * Filter `runthings_wc_coupon_required_products_error_message` to customize error message.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Incorporate amends requested for WordPress plugin directory submission
 
 = 1.0.0 =
 Initial release of the plugin. No upgrade steps required.

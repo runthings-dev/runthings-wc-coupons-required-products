@@ -116,6 +116,12 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Changelog
 
+### 1.1.0 - 7th February 2025
+
+- Incorporate amends requested for WordPress plugin directory submission.
+- Filter `runthings_wc_coupons_required_products_error_message` to customize error message.
+- Filter `runthings_wc_coupon_required_products_error_message` deprecated.
+
 ### 1.0.0 - 29th January 2025
 
 - Initial release.
