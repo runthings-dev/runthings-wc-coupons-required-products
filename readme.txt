@@ -76,7 +76,7 @@ Initial release of the plugin. No upgrade steps required.
 
 == Filters ==
 
-#### runthings_wc_coupon_required_products_error_message
+#### runthings_wc_coupons_required_products_error_message
 
 This filter allows customization of the error message shown when a coupon is not valid due to missing required products.
 

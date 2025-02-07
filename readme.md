@@ -22,7 +22,7 @@ You can specify which products are required for a coupon to be valid, providing 
 
 ## Filters
 
-### runthings_wc_coupon_required_products_error_message
+### runthings_wc_coupons_required_products_error_message
 
 This filter allows customization of the error message shown when a coupon is not valid due to missing required products.
 
@@ -40,7 +40,7 @@ This filter allows customization of the error message shown when a coupon is not
 A simple static message replacement:
 
 ```php
-add_filter('runthings_wc_coupon_required_products_error_message', 'custom_coupon_required_products_error_message');
+add_filter('runthings_wc_coupons_required_products_error_message', 'custom_coupon_required_products_error_message');
 
 function custom_coupon_required_products_error_message($message) {
     return __('Custom error message for invalid coupon.', 'your-theme');
@@ -50,7 +50,7 @@ function custom_coupon_required_products_error_message($message) {
 #### Advanced usage:
 
 ```php
-add_filter('runthings_wc_coupon_required_products_error_message', function ($error_message, $coupon, $required_products, $missing_products) {
+add_filter('runthings_wc_coupons_required_products_error_message', function ($error_message, $coupon, $required_products, $missing_products) {
     $missing_product_titles = [];
 
     foreach ($missing_products as $product_id => $quantity) {
