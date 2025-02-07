@@ -4,7 +4,8 @@ PLUGIN_DIR=$(pwd)
 PLUGINSLUG="runthings-wc-coupons-required-products"
 BUILD_DIR="${PLUGIN_DIR}/build"
 DISTIGNORE="${PLUGIN_DIR}/.distignore"
-MAKEPOT_SCRIPT="${PLUGIN_DIR}/bin/makepot.sh"
+LANG_DIR="languages"
+POT_FILE="$LANG_DIR/$PLUGINSLUG.pot"
 
 # That's all, stop editing! Happy building.
 
@@ -20,6 +21,7 @@ check_tool() {
 check_tool rsync
 check_tool zip
 check_tool mktemp
+check_tool wp
 
 # Check if the script is being run from the root directory of the plugin
 if [[ ! -f "${PLUGIN_DIR}/${PLUGINSLUG}.php" ]]; then
@@ -28,10 +30,10 @@ if [[ ! -f "${PLUGIN_DIR}/${PLUGINSLUG}.php" ]]; then
   exit 1
 fi
 
-# Run makepot.sh to generate/update translation files
-echo "Running makepot.sh to generate/update translation files..."
-if ! ${MAKEPOT_SCRIPT}; then
-  echo "Error: makepot.sh failed."
+# Generate the .pot file
+echo "Generating .pot file..."
+if ! wp i18n make-pot . $POT_FILE --domain=$PLUGINSLUG; then
+  echo "Error: Failed to generate .pot file."
   exit 1
 fi
 
