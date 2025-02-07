@@ -174,7 +174,26 @@ class CouponsRequiredProducts
         }
 
         $error_message = __('This coupon requires specific products in the cart.', 'runthings-wc-coupons-required-products');
-        $error_message = apply_filters('runthings_wc_coupon_required_products_error_message', $error_message, $coupon, $required_products_meta['required_products'], $missing_products);
+        $filtered_message = apply_filters('runthings_wc_coupons_required_products_error_message', $error_message, $coupon, $required_products_meta['required_products'], $missing_products);
+
+        // bug: a typo in the v1.0.0 release used coupon instead of coupons
+        $deprecated_message = apply_filters('runthings_wc_coupon_required_products_error_message', $filtered_message, $coupon, $required_products_meta['required_products'], $missing_products);
+
+        // check if the incorrect filter altered the message
+        if ($deprecated_message !== $filtered_message) {
+            _doing_it_wrong(
+                'runthings_wc_coupon_required_products_error_message',
+                __(
+                    'The filter "runthings_wc_coupon_required_products_error_message" is deprecated. Use "runthings_wc_coupons_required_products_error_message" instead.',
+                    'runthings-wc-coupons-required-products'
+                ),
+                '1.1.0'
+            );
+
+            $filtered_message = $deprecated_message; // honor the original filter
+        }
+
+        $error_message = $filtered_message;
 
         throw new Exception(esc_html($error_message));
     }
