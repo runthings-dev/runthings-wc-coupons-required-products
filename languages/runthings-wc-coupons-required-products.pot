@@ -2,16 +2,16 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Coupons Required Products for WooCommerce 1.0.0\n"
+"Project-Id-Version: Coupons Required Products for WooCommerce 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/runthings-wc-coupons-required-products\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-29T11:04:52+00:00\n"
+"POT-Creation-Date: 2025-02-07T00:44:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: runthings-wc-coupons-required-products\n"
 
 #. Plugin Name of the plugin
@@ -39,26 +39,30 @@ msgstr ""
 msgid "https://runthings.dev/"
 msgstr ""
 
-#: runthings-wc-coupons-required-products.php:73
+#: runthings-wc-coupons-required-products.php:72
 msgid "Coupons Required Products for WooCommerce requires WooCommerce to be active. Please install and activate WooCommerce."
 msgstr ""
 
-#: runthings-wc-coupons-required-products.php:97
+#: runthings-wc-coupons-required-products.php:91
 msgid "Required products"
 msgstr ""
 
-#: runthings-wc-coupons-required-products.php:98
+#: runthings-wc-coupons-required-products.php:92
 msgid "Search for a product&hellip;"
 msgstr ""
 
-#: runthings-wc-coupons-required-products.php:108
+#: runthings-wc-coupons-required-products.php:102
 msgid "Select products that are required for this coupon."
 msgstr ""
 
-#: runthings-wc-coupons-required-products.php:167
+#: runthings-wc-coupons-required-products.php:161
 msgid "This coupon is not valid."
 msgstr ""
 
-#: runthings-wc-coupons-required-products.php:182
+#: runthings-wc-coupons-required-products.php:176
 msgid "This coupon requires specific products in the cart."
+msgstr ""
+
+#: runthings-wc-coupons-required-products.php:186
+msgid "The filter \"runthings_wc_coupon_required_products_error_message\" is deprecated. Use \"runthings_wc_coupons_required_products_error_message\" instead."
 msgstr ""
