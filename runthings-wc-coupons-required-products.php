@@ -185,6 +185,8 @@ class CouponsRequiredProducts
         if ($deprecated_message !== $filtered_message) {
             _doing_it_wrong(
                 'runthings_wc_coupon_required_products_error_message',
+                // reason: false alarm by pcp, the message is escaped and not user input
+                // whpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 __(
                     'The filter "runthings_wc_coupon_required_products_error_message" is deprecated. Use "runthings_wc_coupons_required_products_error_message" instead.',
                     'runthings-wc-coupons-required-products'
