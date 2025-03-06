@@ -116,6 +116,10 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Changelog
 
+### 1.2.0 - 6th March 2025
+
+- Fixed a bug which caused a valid voucher to fail to verify.
+
 ### 1.1.0 - 7th February 2025
 
 - Incorporate amends requested for WordPress plugin directory submission.
