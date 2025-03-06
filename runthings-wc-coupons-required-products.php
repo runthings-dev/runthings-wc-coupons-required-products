@@ -157,10 +157,12 @@ class CouponsRequiredProducts
         }
 
         // Check version and handle accordingly
-        if (version_compare($required_products_meta['version'], '1.0.0', '>=')) {
-            $error_message = __('This coupon is not valid.', 'runthings-wc-coupons-required-products');
-            throw new Exception(esc_html($error_message));
-        }
+        // Not required until a breaking change is made
+        // BUG: Should not compare to the plugin version, but the version of the data structure
+        // if (version_compare($required_products_meta['version'], '1.0.0', '>=')) {
+        //     $error_message = __('This coupon is not valid.', 'runthings-wc-coupons-required-products');
+        //     throw new Exception(esc_html($error_message));
+        // }
 
         $missing_products = [];
         foreach ($required_products_meta['required_products'] as $product_id => $quantity) {
