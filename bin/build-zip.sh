@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PLUGIN_DIR=$(pwd)
-PLUGINSLUG="runthings-wc-coupons-required-products"
+PLUGINSLUG=$(basename "$PLUGIN_DIR")
 BUILD_DIR="${PLUGIN_DIR}/build"
 DISTIGNORE="${PLUGIN_DIR}/.distignore"
 LANG_DIR="languages"
