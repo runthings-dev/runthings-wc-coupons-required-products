@@ -5,7 +5,7 @@ Tested up to: 6.8
 Requires at least: 6.4
 Requires PHP: 8.0
 Requires WooCommerce: 8.0
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,6 +64,9 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 
 == Changelog ==
 
+= 1.2.1 - 24th June 2025 =
+* Bump WordPress tested up to field to support 6.8 branch.
+
 = 1.2.0 - 6th March 2025 =
 * Fixed a bug which caused a valid voucher to fail to verify.
 
@@ -78,6 +81,9 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 * Filter `runthings_wc_coupon_required_products_error_message` to customize error message.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Bump WordPress tested up to field to support 6.8 branch.
 
 = 1.2.0 =
 Fixed a bug which caused a valid voucher to fail to verify.

@@ -4,7 +4,7 @@
  * Plugin Name: Coupons Required Products for WooCommerce
  * Plugin URI: https://runthings.dev/wordpress-plugins/wc-coupons-required-products/
  * Description: Restrict the usage of coupons unless required products are in the cart.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: runthingsdev
  * Author URI: https://runthings.dev/
  * License: GPLv3 or later
@@ -45,7 +45,7 @@ if (!defined('WPINC')) {
 
 class CouponsRequiredProducts
 {
-    const PLUGIN_VERSION = '1.2.0';
+    const PLUGIN_VERSION = '1.2.1';
     const REQUIRED_PRODUCTS_META_KEY = 'runthings_wc_required_products';
 
     public function __construct()
