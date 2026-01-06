@@ -116,6 +116,10 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Changelog
 
+### 1.2.1 - 24th June 2025
+
+- Bump WordPress tested up to field to support 6.8 branch.
+
 ### 1.2.0 - 6th March 2025
 
 - Fixed a bug which caused a valid voucher to fail to verify.
