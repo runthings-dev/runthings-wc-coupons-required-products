@@ -64,6 +64,11 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 
 == Changelog ==
 
+= 1.2.2 - 6th January 2026 =
+* Fixed missing "And" separator in the coupon usage restriction panel to match WooCommerce core styling.
+* Move plugin directory assets to .wordpress-org/ folder.
+* Bump WordPress tested up to field to support 6.9 branch.
+
 = 1.2.1 - 24th June 2025 =
 * Bump WordPress tested up to field to support 6.8 branch.
 
@@ -82,17 +87,14 @@ If you have a specific requirement, and time allows, I'll try to implement it.
 
 == Upgrade Notice ==
 
+= 1.2.2 =
+Fixed missing "And" separator in the coupon usage restriction panel to match WooCommerce core styling.
+
 = 1.2.1 =
 Bump WordPress tested up to field to support 6.8 branch.
 
 = 1.2.0 =
 Fixed a bug which caused a valid voucher to fail to verify.
-
-= 1.1.0 =
-Incorporate amends requested for WordPress plugin directory submission
-
-= 1.0.0 =
-Initial release of the plugin. No upgrade steps required.
 
 == Filters ==
 

@@ -116,6 +116,12 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Changelog
 
+### 1.2.2 - 6th January 2026
+
+- Fixed missing "And" separator in the coupon usage restriction panel to match WooCommerce core styling.
+- Move plugin directory assets to .wordpress-org/ folder.
+- Bump WordPress tested up to field to support 6.9 branch.
+
 ### 1.2.1 - 24th June 2025
 
 - Bump WordPress tested up to field to support 6.8 branch.
