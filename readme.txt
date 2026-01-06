@@ -1,7 +1,7 @@
 === Coupons Required Products for WooCommerce ===
 Contributors: runthingsdev
 Tags: woocommerce, coupons, required products, discount
-Tested up to: 6.8
+Tested up to: 6.9
 Requires at least: 6.4
 Requires PHP: 8.0
 Requires WooCommerce: 8.0
