@@ -78,6 +78,7 @@ class CouponsRequiredProducts
         global $post;
 
         echo '<div class="options_group">';
+        echo '<div class="hr-section hr-section-coupon_restrictions">' . esc_html__('And', 'runthings-wc-coupons-required-products') . '</div>';
         wp_nonce_field('runthings_save_required_products', 'runthings_required_products_nonce');
 
         $required_products_meta = get_post_meta($post->ID, self::REQUIRED_PRODUCTS_META_KEY, true);
