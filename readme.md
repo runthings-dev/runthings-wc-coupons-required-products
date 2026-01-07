@@ -106,13 +106,13 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 ## Screenshots
 
 1. Coupon settings page with required products field.
-   ![Coupon settings page with required products field](https://raw.githubusercontent.com/runthings-dev/runthings-wc-coupons-required-products/main/.wordpress-org/screenshot-1.png)
+   ![Coupon settings page with required products field](https://raw.githubusercontent.com/runthings-dev/runthings-wc-coupons-required-products/master/.wordpress-org/screenshot-1.png)
 
 2. Example denied coupon usage due to missing required products.
-   ![Example denied coupon usage due to missing required products](https://raw.githubusercontent.com/runthings-dev/runthings-wc-coupons-required-products/main/.wordpress-org/screenshot-2.png)
+   ![Example denied coupon usage due to missing required products](https://raw.githubusercontent.com/runthings-dev/runthings-wc-coupons-required-products/master/.wordpress-org/screenshot-2.png)
 
 3. Example denied coupon usage due to missing required products, with custom message.
-   ![Example denied coupon usage due to missing required products](https://raw.githubusercontent.com/runthings-dev/runthings-wc-coupons-required-products/main/.wordpress-org/screenshot-3.png)
+   ![Example denied coupon usage due to missing required products](https://raw.githubusercontent.com/runthings-dev/runthings-wc-coupons-required-products/master/.wordpress-org/screenshot-3.png)
 
 ## Changelog
 
