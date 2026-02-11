@@ -4,7 +4,7 @@
  * Plugin Name: Required Products Coupons for WooCommerce
  * Plugin URI: https://runthings.dev/wordpress-plugins/wc-coupons-required-products/
  * Description: Restrict the usage of coupons unless required products are in the cart.
- * Version: 1.2.2
+ * Version: 1.3.0
  * Author: runthingsdev
  * Author URI: https://runthings.dev/
  * License: GPLv3 or later
