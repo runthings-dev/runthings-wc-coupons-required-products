@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Coupons Required Products for WooCommerce
+ * Plugin Name: Required Products Coupons for WooCommerce
  * Plugin URI: https://runthings.dev/wordpress-plugins/wc-coupons-required-products/
  * Description: Restrict the usage of coupons unless required products are in the cart.
  * Version: 1.2.2
@@ -69,7 +69,7 @@ class CouponsRequiredProducts
     public function admin_notice_wc_inactive(): void
     {
         echo '<div class="error"><p>';
-        esc_html_e('Coupons Required Products for WooCommerce requires WooCommerce to be active. Please install and activate WooCommerce.', 'runthings-wc-coupons-required-products');
+        esc_html_e('Required Products Coupons for WooCommerce requires WooCommerce to be active. Please install and activate WooCommerce.', 'runthings-wc-coupons-required-products');
         echo '</p></div>';
     }
 

@@ -1,4 +1,4 @@
-=== Coupons Required Products for WooCommerce ===
+=== Required Products Coupons for WooCommerce ===
 Contributors: runthingsdev
 Tags: woocommerce, coupons, required products, discount
 Tested up to: 6.9

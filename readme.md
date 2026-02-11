@@ -1,4 +1,4 @@
-# Coupons Required Products for WooCommerce
+# Required Products Coupons for WooCommerce
 
 Restrict the usage of WooCommerce coupons unless required products are in the cart.
 
