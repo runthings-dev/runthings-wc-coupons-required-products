@@ -172,6 +172,12 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Changelog
 
+### 1.3.0 - 11th February 2026
+
+- Add `runthings_wc_coupons_required_products_missing_products` filter for custom required-product validation.
+- Document variation support and the new filter.
+- Fix required product checks to support product variations.
+
 ### 1.2.2 - 6th January 2026
 
 - Fixed missing "And" separator in the coupon usage restriction panel to match WooCommerce core styling.
