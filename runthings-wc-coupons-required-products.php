@@ -149,11 +149,22 @@ class CouponsRequiredProducts
 
         $cart_products = [];
         foreach (WC()->cart->get_cart() as $cart_item) {
-            $product_id = $cart_item['product_id'];
+            $product_id = (int) $cart_item['product_id'];
+            $variation_id = isset($cart_item['variation_id']) ? (int) $cart_item['variation_id'] : 0;
+            $quantity = (int) $cart_item['quantity'];
+
             if (isset($cart_products[$product_id])) {
-                $cart_products[$product_id] += $cart_item['quantity'];
+                $cart_products[$product_id] += $quantity;
             } else {
-                $cart_products[$product_id] = $cart_item['quantity'];
+                $cart_products[$product_id] = $quantity;
+            }
+
+            if ($variation_id > 0) {
+                if (isset($cart_products[$variation_id])) {
+                    $cart_products[$variation_id] += $quantity;
+                } else {
+                    $cart_products[$variation_id] = $quantity;
+                }
             }
         }
 
