@@ -4,13 +4,13 @@ Restrict the usage of WooCommerce coupons unless required products are in the ca
 
 ## Description
 
-This plugin allows you to restrict the usage of WooCommerce coupons unless specific products are in the cart.
+This plugin allows you to restrict the usage of WooCommerce coupons unless specific products or variations are in the cart.
 
 You can specify which products are required for a coupon to be valid, providing more control over your discount strategies.
 
 ## Features
 
-- Restrict coupon usage based on all required products being in the cart.
+- Restrict coupon usage based on all required products (including variations) being in the cart.
 - Customize the error message via a filter.
 
 ## Installation
@@ -94,6 +94,8 @@ In the "Required products" section, select the products that must be in the cart
 Yes, this plugin works alongside other WooCommerce coupon restrictions such as minimum spend, maximum spend, and role restrictions.
 
 ### Can you implement a specific variation I need for the required products?
+
+Specific variations are supported in the required products selector.
 
 The plugin has been kept deliberately simple for now, because this met the client's specific needs.
 
