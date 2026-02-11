@@ -183,6 +183,15 @@ class CouponsRequiredProducts
             }
         }
 
+        $missing_products = apply_filters(
+            'runthings_wc_coupons_required_products_missing_products',
+            $missing_products,
+            $coupon,
+            $required_products_meta['required_products'],
+            $cart_products,
+            WC()->cart
+        );
+
         if (empty($missing_products)) {
             return $is_valid;
         }
