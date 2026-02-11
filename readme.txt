@@ -100,6 +100,20 @@ Fixed a bug which caused a valid voucher to fail to verify.
 
 == Filters ==
 
+#### runthings_wc_coupons_required_products_missing_products
+
+This filter allows third-party plugins to alter the missing required products before the coupon is rejected.
+
+For detailed documentation and advanced examples, see the [full documentation on GitHub](https://github.com/runthings-dev/runthings-wc-coupons-required-products#filters).
+
+##### Parameters:
+
+1. **`$missing_products`** (`array`): The missing products in the cart, in the format `[product_id => quantity]`.
+2. **`$coupon`** (`WC_Coupon`): The coupon object being validated.
+3. **`$required_products`** (`array`): The required products for the coupon, in the format `[product_id => quantity]`.
+4. **`$cart_products`** (`array`): Products found in the cart, in the format `[product_id => quantity]`.
+5. **`$cart`** (`WC_Cart`): The cart instance.
+
 #### runthings_wc_coupons_required_products_error_message
 
 This filter allows customization of the error message shown when a coupon is not valid due to missing required products.

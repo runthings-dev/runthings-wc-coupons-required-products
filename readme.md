@@ -22,6 +22,60 @@ You can specify which products are required for a coupon to be valid, providing 
 
 ## Filters
 
+### runthings_wc_coupons_required_products_missing_products
+
+This filter allows third-party plugins to alter the missing required products before the coupon is rejected.
+
+#### Parameters:
+
+| Parameter            | Type        | Description                                                                               |
+| -------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `$missing_products`  | `array`     | The missing products in the cart, in the format `[product_id => quantity]`.               |
+| `$coupon`            | `WC_Coupon` | The coupon object being validated.                                                        |
+| `$required_products` | `array`     | The required products for the coupon, in the format `[product_id => quantity]`.           |
+| `$cart_products`     | `array`     | Products found in the cart, in the format `[product_id => quantity]`.                      |
+| `$cart`              | `WC_Cart`   | The cart instance.                                                                        |
+
+#### Usage example:
+
+Allow a custom packed product to satisfy a required product ID:
+
+```php
+add_filter('runthings_wc_coupons_required_products_missing_products', function ($missing_products, $coupon, $required_products, $cart_products, $cart) {
+    foreach ($cart->get_cart() as $cart_item) {
+        if (!empty($cart_item['custom_pack_product_id'])) {
+            $pack_product_id = (int) $cart_item['custom_pack_product_id'];
+            unset($missing_products[$pack_product_id]);
+        }
+    }
+
+    return $missing_products;
+}, 10, 5);
+```
+
+#### Advanced usage:
+
+Only satisfy a required product if the packed quantity meets the requirement:
+
+```php
+add_filter('runthings_wc_coupons_required_products_missing_products', function ($missing_products, $coupon, $required_products, $cart_products, $cart) {
+    foreach ($cart->get_cart() as $cart_item) {
+        if (empty($cart_item['custom_pack_product_id']) || empty($cart_item['custom_pack_product_qty'])) {
+            continue;
+        }
+
+        $pack_product_id = (int) $cart_item['custom_pack_product_id'];
+        $pack_quantity = (int) $cart_item['custom_pack_product_qty'];
+
+        if (isset($missing_products[$pack_product_id]) && $pack_quantity >= $missing_products[$pack_product_id]) {
+            unset($missing_products[$pack_product_id]);
+        }
+    }
+
+    return $missing_products;
+}, 10, 5);
+```
+
 ### runthings_wc_coupons_required_products_error_message
 
 This filter allows customization of the error message shown when a coupon is not valid due to missing required products.
