@@ -5,7 +5,7 @@ Tested up to: 7.1
 Requires at least: 6.4
 Requires PHP: 8.0
 Requires WooCommerce: 8.0
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,10 @@ Please open an issue on the GitHub repo, over at https://github.com/runthings-de
 
 == Changelog ==
 
+= 1.3.1 - 16th November 2026 =
+* Update WordPress tested up to metadata to 7.1.
+* Synchronize the plugin version constant with the release version.
+
 = 1.3.0 - 11th February 2026 =
 * Add `runthings_wc_coupons_required_products_missing_products` filter for custom required-product validation.
 * Document variation support and the new filter.
@@ -94,14 +98,14 @@ Please open an issue on the GitHub repo, over at https://github.com/runthings-de
 
 == Upgrade Notice ==
 
+= 1.3.1 =
+Update WordPress tested up to metadata to 7.1 and synchronize the plugin version constant with the release version.
+
 = 1.3.0 =
 Adds a new filter for custom required-product validation and improves variation handling.
 
 = 1.2.2 =
 Fixed missing "And" separator in the coupon usage restriction panel to match WooCommerce core styling.
-
-= 1.2.1 =
-Bump WordPress tested up to field to support 6.8 branch.
 
 == Filters ==
 

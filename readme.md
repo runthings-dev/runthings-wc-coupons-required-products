@@ -172,6 +172,11 @@ Please open an issue on the repo, over at [GitHub](https://github.com/runthings-
 
 ## Changelog
 
+### 1.3.1 - 16th November 2026
+
+- Update WordPress tested up to metadata to 7.1.
+- Synchronize the plugin version constant with the release version.
+
 ### 1.3.0 - 11th February 2026
 
 - Add `runthings_wc_coupons_required_products_missing_products` filter for custom required-product validation.
